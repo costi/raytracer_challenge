@@ -55,4 +55,13 @@ def step_impl(context, x, y, z):
 @then(u'p = tuple({x:d}, {y:d}, {z:d}, {w:d})')
 def step_impl(context, x, y, z, w):
     tuple = Tuple(x, y, z, w)
-    assert context.p == tuple, f'{str(context.p) = } not equal with {str(tuple) =}'
+    assert context.p == tuple, f'{str(context.p) = } not equal with {str(tuple) = }'
+
+@given(u'v ← vector({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    context.v = Vector(x, y, z)
+
+@then(u'v = tuple({x:d}, {y:d}, {z:d}, {w:d})')
+def step_impl(context, x, y, z, w):
+    tuple = Tuple(x, y, z, w)
+    assert context.v == tuple, f'{str(context.v) = } not equal with {str(tuple) = }'

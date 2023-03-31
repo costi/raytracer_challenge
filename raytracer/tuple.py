@@ -27,8 +27,28 @@ class Tuple:
                         self.w == other.w
 
 class Point(Tuple):
+    """
+    Point is a tuple with w = 1
+    Why w = 1?
+    So that two points substracted is a vector = the distance between the points
+    """
+
     def __init__(self, x, y, z):
         super().__init__(x, y, z, 1)
 
     def __str__(self):
         return f'Point({self.x}, {self.y}, {self.z})'
+
+class Vector(Tuple):
+    """
+    Vector is a tuple with w = 0
+    Why w = 0?
+    So that:
+        Adding two vectors is a vector
+        Adding a point to a vector is a point moved by that vector
+    """
+    def __init__(self, x, y, z):
+        super().__init__(x, y, z, 0)
+
+    def __str__(self):
+        return f'Vector({self.x}, {self.y}, {self.z})'
