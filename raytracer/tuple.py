@@ -26,6 +26,26 @@ class Tuple:
                     self.z == other.z and \
                         self.w == other.w
 
+    def __add__(self, other):
+        """ Overrides + operator """
+        if isinstance(other, Tuple):
+            return Tuple(
+                self.x + other.x,
+                self.y + other.y,
+                self.z + other.z,
+                self.w + other.w
+                )
+    def __sub__(self, other):
+        """ Overrides - operator """
+        if isinstance(other, Tuple):
+            return Tuple(
+                self.x - other.x,
+                self.y - other.y,
+                self.z - other.z,
+                self.w - other.w
+            )
+
+
 class Point(Tuple):
     """
     Point is a tuple with w = 1

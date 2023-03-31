@@ -16,6 +16,14 @@ def equal(a, b):
 def step_impl(context, x, y, z, w):
     context.a = Tuple(x, y, z, w)
 
+@given(u'a1 ← tuple({x:g}, {y:g}, {z:g}, {w:g})')
+def step_impl(context, x, y, z, w):
+    context.a1 = Tuple(x, y, z, w)
+
+@given(u'a2 ← tuple({x:g}, {y:g}, {z:g}, {w:g})')
+def step_impl(context, x, y, z, w):
+    context.a2 = Tuple(x, y, z, w)
+
 @then(u'a.x = {x:f}')
 def step_impl(context, x):
     assert equal(context.a.x, x) is True, f"Expected x {context.a.x}, {x = }"
@@ -52,6 +60,14 @@ def step_impl(context):
 def step_impl(context, x, y, z):
     context.p = Point(x, y, z)
 
+@given(u'p1 ← point({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    context.p1 = Point(x, y, z)
+
+@given(u'p2 ← point({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    context.p2 = Point(x, y, z)
+
 @then(u'p = tuple({x:d}, {y:d}, {z:d}, {w:d})')
 def step_impl(context, x, y, z, w):
     tuple = Tuple(x, y, z, w)
@@ -61,7 +77,51 @@ def step_impl(context, x, y, z, w):
 def step_impl(context, x, y, z):
     context.v = Vector(x, y, z)
 
+@given(u'v1 ← vector({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    context.v1 = Vector(x, y, z)
+
+@given(u'v2 ← vector({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    context.v2 = Vector(x, y, z)
+
+@given(u'zero ← vector({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    context.zero = Vector(x, y, z)
+
 @then(u'v = tuple({x:d}, {y:d}, {z:d}, {w:d})')
 def step_impl(context, x, y, z, w):
     tuple = Tuple(x, y, z, w)
     assert context.v == tuple, f'{str(context.v) = } not equal with {str(tuple) = }'
+
+@then(u'a1 + a2 = tuple({x:d}, {y:d}, {z:d}, {w:d})')
+def step_impl(context, x, y, z, w):
+    tuple = Tuple(x, y, z, w)
+    sum = context.a1 + context.a2
+    assert sum == tuple, f'{str(sum) = } not equal with {str(tuple) = }'
+
+@then(u'p1 - p2 = vector({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    diff = context.p1 - context.p2
+    vector = Vector(x, y, z)
+    assert diff == vector, f'{str(diff) = } not equal with {str(vector) = }'
+
+@then(u'p - v = point({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    diff = context.p - context.v
+    point = Point(x, y, z)
+    assert diff == point, f'{str(diff) = } not equal with {str(point) = }'
+
+@then(u'v1 - v2 = vector({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    diff = context.v1 - context.v2
+    vector = Vector(x, y, z)
+    assert diff == vector, f'{str(diff) = } not equal with {str(vector) = }'
+
+@then(u'zero - v = vector({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    diff = context.zero - context.v
+    vector = Vector(x, y, z)
+    assert diff == vector, f'{str(diff) = } not equal with {str(vector) = }'
+
+
