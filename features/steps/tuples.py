@@ -47,3 +47,12 @@ def step_impl(context):
 @then(u'a is not a vector')
 def step_impl(context):
     assert context.a.is_vector() is False, f'{str(context.a) = } is a vector'
+
+@given(u'p ← point({x:d}, {y:d}, {z:d})')
+def step_impl(context, x, y, z):
+    context.p = Point(x, y, z)
+
+@then(u'p = tuple({x:d}, {y:d}, {z:d}, {w:d})')
+def step_impl(context, x, y, z, w):
+    tuple = Tuple(x, y, z, w)
+    assert context.p == tuple, f'{str(context.p) = } not equal with {str(tuple) =}'
