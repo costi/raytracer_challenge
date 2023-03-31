@@ -45,6 +45,16 @@ class Tuple:
                 self.w - other.w
             )
 
+    def __mul__(self, multiplier):
+        """ Overrides * operator """
+        if isinstance(multiplier, float):
+            return Tuple(
+                self.x * multiplier,
+                self.y * multiplier,
+                self.z * multiplier,
+                self.w * multiplier
+            )
+
     def __neg__(self):
         """Overrides - (negation)"""
         return Tuple(-self.x, -self.y, -self.z, -self.w)

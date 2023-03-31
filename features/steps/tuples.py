@@ -128,3 +128,9 @@ def step_impl(context, x, y, z):
 def step_impl(context, x, y, z, w):
     tuple = Tuple(x, y, z, w)
     assert -context.a == tuple
+
+@then(u'a * {multiplier:g} = tuple({x:g}, {y:g}, {z:g}, {w:g})')
+def step_impl(context, multiplier, x, y, z, w):
+    tuple = Tuple(x, y, z, w)
+    product = context.a * multiplier
+    assert product == tuple, f'{str(product) = }, not equal with {str(tuple) = }'
