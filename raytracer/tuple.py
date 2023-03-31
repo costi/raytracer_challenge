@@ -1,3 +1,4 @@
+import math
 class Tuple:
     """
     Class for holding points and vectors. Points have w=1.0 and Vectors have w=0.0
@@ -96,3 +97,6 @@ class Vector(Tuple):
 
     def __str__(self):
         return f'Vector({self.x}, {self.y}, {self.z})'
+
+    def magnitude(self):
+        return math.sqrt(self.x**2 + self.y**2 + self.z**2)

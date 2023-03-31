@@ -140,3 +140,13 @@ def step_impl(context, divisor, x, y, z, w):
     tuple = Tuple(x, y, z, w)
     division = context.a / divisor
     assert division == tuple, f'{str() = }, not equal with {str(tuple) = }'
+
+@then(u'magnitude(v) = {magnitude:g}')
+def step_impl(context, magnitude):
+    computed_magnitude = context.v.magnitude()
+    assert computed_magnitude == magnitude
+
+@then(u'magnitude(v) = √{magnitude_squared:g}')
+def step_impl(context, magnitude_squared):
+    computed_magnitude = context.v.magnitude()
+    assert computed_magnitude == math.sqrt(magnitude_squared)
