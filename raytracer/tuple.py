@@ -45,6 +45,10 @@ class Tuple:
                 self.w - other.w
             )
 
+    def __neg__(self):
+        """Overrides - (negation)"""
+        return Tuple(-self.x, -self.y, -self.z, -self.w)
+
 
 class Point(Tuple):
     """

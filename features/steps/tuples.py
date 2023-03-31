@@ -12,7 +12,7 @@ def equal(a, b):
         return False
 
 
-@given(u'a ← tuple({x:f}, {y:f}, {z:f}, {w:f})')
+@given(u'a ← tuple({x:g}, {y:g}, {z:g}, {w:g})')
 def step_impl(context, x, y, z, w):
     context.a = Tuple(x, y, z, w)
 
@@ -124,4 +124,7 @@ def step_impl(context, x, y, z):
     vector = Vector(x, y, z)
     assert diff == vector, f'{str(diff) = } not equal with {str(vector) = }'
 
-
+@then(u'-a = tuple({x:g}, {y:g}, {z:g}, {w:g})')
+def step_impl(context, x, y, z, w):
+    tuple = Tuple(x, y, z, w)
+    assert -context.a == tuple
