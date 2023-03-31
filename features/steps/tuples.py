@@ -134,3 +134,9 @@ def step_impl(context, multiplier, x, y, z, w):
     tuple = Tuple(x, y, z, w)
     product = context.a * multiplier
     assert product == tuple, f'{str(product) = }, not equal with {str(tuple) = }'
+
+@then(u'a / {divisor:g} = tuple({x:g}, {y:g}, {z:g}, {w:g})')
+def step_impl(context, divisor, x, y, z, w):
+    tuple = Tuple(x, y, z, w)
+    division = context.a / divisor
+    assert division == tuple, f'{str() = }, not equal with {str(tuple) = }'

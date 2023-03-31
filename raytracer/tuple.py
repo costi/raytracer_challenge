@@ -55,6 +55,16 @@ class Tuple:
                 self.w * multiplier
             )
 
+    def __truediv__(self, divisor):
+        """ Overrides / operator """
+        if isinstance(divisor, float):
+            return Tuple(
+                self.x / divisor,
+                self.y / divisor,
+                self.z / divisor,
+                self.w / divisor
+            )
+
     def __neg__(self):
         """Overrides - (negation)"""
         return Tuple(-self.x, -self.y, -self.z, -self.w)
