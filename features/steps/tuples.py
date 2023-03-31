@@ -150,3 +150,8 @@ def step_impl(context, magnitude):
 def step_impl(context, magnitude_squared):
     computed_magnitude = context.v.magnitude()
     assert computed_magnitude == math.sqrt(magnitude_squared)
+
+@then(u'normalize(v) = vector({x:g}, {y:g}, {z:g})')
+def step_impl(context, x, y, z):
+    vector = Vector(x, y, z)
+    assert context.v.normalize() == vector
