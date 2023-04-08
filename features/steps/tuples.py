@@ -73,9 +73,17 @@ def step_impl(context, x, y, z, w):
     tuple = Tuple(x, y, z, w)
     assert context.p == tuple, f'{str(context.p) = } not equal with {str(tuple) = }'
 
-@given(u'v ← vector({x:d}, {y:d}, {z:d})')
+@given(u'v ← vector({x:g}, {y:g}, {z:g})')
 def step_impl(context, x, y, z):
     context.v = Vector(x, y, z)
+
+@given(u'a ← vector({x:g}, {y:g}, {z:g})')
+def step_impl(context, x, y, z):
+    context.a = Vector(x, y, z)
+
+@given(u'b ← vector({x:g}, {y:g}, {z:g})')
+def step_impl(context, x, y, z):
+    context.b = Vector(x, y, z)
 
 @given(u'v1 ← vector({x:d}, {y:d}, {z:d})')
 def step_impl(context, x, y, z):
@@ -155,3 +163,27 @@ def step_impl(context, magnitude_squared):
 def step_impl(context, x, y, z):
     vector = Vector(x, y, z)
     assert context.v.normalize() == vector
+
+@then(u'normalize(v) = approximately vector({x:g}, {y:g}, {z:g})')
+def step_impl(context, x, y, z):
+    assert context.v.normalize() == Vector(x, y, z)
+
+@when(u'norm ← normalize(v)')
+def step_impl(context):
+    context.norm = context.v.normalize()
+
+@then(u'magnitude(norm) = {m:g}')
+def step_impl(context, m):
+    assert context.norm.magnitude() == m
+
+@then(u'dot(a, b) = {dot:g}')
+def step_impl(context, dot):
+    assert math.isclose(context.a.dot(context.b), dot, rel_tol = 1e-5)
+
+@then(u'cross(a, b) = vector({x:g}, {y:g}, {z:g})')
+def step_impl(context, x, y, z):
+    assert context.a.cross(context.b) == Vector(x, y, z)
+
+@then(u'cross(b, a) = vector({x:g}, {y:g}, {z:g})')
+def step_impl(context, x, y, z):
+    assert context.b.cross(context.a) == Vector(x, y, z)

@@ -3,6 +3,7 @@ class Tuple:
     """
     Class for holding points and vectors. Points have w=1.0 and Vectors have w=0.0
     """
+    EPSILON = 1e-5
 
     def __init__(self, x, y, z, w):
         self.x = float(x)
@@ -22,10 +23,11 @@ class Tuple:
     def __eq__(self, other):
         """equal if if coordinates are same"""
         if isinstance(other, Tuple):
-            return self.x == other.x and \
-                self.y == other.y and \
-                    self.z == other.z and \
-                        self.w == other.w
+            return \
+                math.isclose(self.x, other.x, rel_tol = Tuple.EPSILON) and \
+                math.isclose(self.y, other.y, rel_tol = Tuple.EPSILON) and \
+                math.isclose(self.z, other.z, rel_tol = Tuple.EPSILON) and \
+                math.isclose(self.w, other.w, rel_tol = Tuple.EPSILON)
 
     def __add__(self, other):
         """ Overrides + operator """
@@ -104,3 +106,17 @@ class Vector(Tuple):
     def normalize(self):
         mag = self.magnitude()
         return Vector(self.x / mag, self.y / mag, self.z / mag)
+    
+    def dot(self, other) -> float:
+        return (
+            self.x * other.x +
+            self.y * other.y +
+            self.z * other.z
+        )
+
+    def cross(a, b):
+        return Vector(
+            a.y * b.z - a.z * b.y,
+            a.z * b.x - a.x * b.z,
+            a.x * b.y - a.y * b.x
+        )
