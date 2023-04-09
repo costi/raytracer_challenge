@@ -18,7 +18,7 @@ class Tuple:
         return self.w == 0.0
 
     def __str__(self):
-        return f"Tuple({self.x}, {self.y}, {self.z}, {self.w}). {self.is_point() = }"
+        return f"Tuple({self.x:6.2f}, {self.y:6.2f}, {self.z:6.2f}, {self.w:1.0f}). {self.is_point() = }"
 
     def __eq__(self, other):
         """equal if if coordinates are same"""
